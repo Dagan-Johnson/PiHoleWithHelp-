@@ -1,0 +1,68 @@
+Hello And Welcome to my Walk-through for the PiHole project! Now I am sure you're wondering what the point of this is,
+as there are already a large amount of documentation online for this project. Well I recently completed this project
+(sort of) and wanted to try and save anyone some time with some troubleshooting that I had to do so if you see something
+EXCLAIMED please pay special attention.
+
+1. BEFORE HAND(IMPORTANT)
+  A.Pre-checks before starting
+    So for this project I really(x3) recomend you check your ISP availability to change your dhcp/dns settings. I did not
+    check this and made it to the very last step only to learn that XFinity does not allow for you to change this information
+    on your own. Thus negating all 8ish hours of project time and troubleshooting i did.
+  
+    Next thing to check is whether or not your pi has wifi capabilities. You can do this by checking the product info, but 
+    honestly I was useing a w1.1 which i understand is one of the oldest models and it did have capabilites so likely your
+    all good. Also it's a good idea to have at least a monitor so that if you get a lil out of sorts you can see what the pi
+    is complaining about.
+  
+  B.What you need physically
+    So as i understand it, raspberry pi's need to be flashed usually utilizing an sd card. They flash on first reset after
+    inserting the card, but i'll talk on that later. So you need something to be able to read/write to an sd card. If you're
+    looking for exactly the one i used the link is below. 
+      
+    https://www.amazon.com/Aluminum-Adapter-Computer-Devices-Compatible/dp/B0FJB84N94/ref=sr_1_1_sspa?c=ts&dib=eyJ2IjoiMSJ9.H5IKRjDRVYaCKNz_1AX2LcKn9hiLBC6LkUgo1WVJ6HgxeT_lZMG-M1rGpWvet9rHqAd4qhTFQIB8v87EHNrJbb4e-vYDNnJGQNJTbEWMckOPu0s0x1gvhLcdaOw6-0vxNapqZK4UaxwFSHy29mcfGkETtpNc66CZqVGxANNeWWvQcOX4o5TJIqjU1G_eMdUFN_S2cd0bLG4G-v3qgJXqETW1G9F-vQ-KkHsyY-5QoxyUBSYe_BPyfnWMhsT3huF5QeHANJlONw6o8rz1CpcUYePLfZO0JEokhrKLLd3pGMk.g8gNiZMrono_k8BJ9rv2tQ8r6bnCxobXMn-zTUfd4Q0&dib_tag=se&keywords=Computer+Memory+Card+Adapters&qid=1761934191&s=pc&sr=1-1-spons&ts_id=15874201&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1
+
+    You'll also need a device that's able to connect to the internet to be able to download a few helpful installers. Below is the
+    itemized list.
+      1. SD card adapter
+      2. Device able to connect to internet and previous adapter
+      3. Monitor and connection for that monitor (optional, but do it man frfr)
+  
+2.Getting into it
+  A. First thing you need is the raspberry pi imager for the flash. This also takes some time to flash and verify so get on this
+     ASAP. 
+      
+      https://www.raspberrypi.com/software/
+
+      So once you have the imager downloaded, you should have your sd card inserted into your computer of choice, and running
+      said imager. The program should be asking you what type of os you would like to use. I used the raspberry pi lite headless
+      as it is not too resources intensive and the more local mem you can give the pi the better. Seems like the lite is a less
+      used model so you can find it under the more section for the os. After you input the beginning stuf and click next you
+      should get a prompt that asks if you would like to implement some settings or just do the bare install.
+
+      SAY YES! edit those settings so we don't have to add files yourself. but if you don't want to ill explain how to do that too
+
+
+      IMPORTANT! If you input the wrong settings before flashing you'll have to re-flash, so it's worth it to slow down and make
+                sure you have everything right the first time.
+          
+        a. If you said yes these are the things you need to change
+          1.SSH on
+          2.WIFI credentials
+            Make sure the password and ssid is correct as it is case sensitive and if you mess up
+            on this part after flashing 
+            -if your ssid is hidden there should be an option to indicate this.
+          3.Login Credentials
+            -Put in a username you'll remmber and a basic password. This is for the ssh section where we'll be connecting to the 
+              pi over the network to ensure its working all good. 
+          4.Pi name change(optional)
+            - feel free if you like, it'll come into play for the ssh section and also on your network list.
+
+        b. If you're a stickler for not using software you need to make two files. The NAMES of these files are real important for 
+            the flashing so here's a description of 'em and you should be able to pull both from this repository. THey need to be
+            under the "boot" file set. That is to say when you put the card back in the reader after flashing you should see a 
+            
+          1.SSH
+            -completly empty and you should see it dissapear after flashing, this is just telling the board to turn on ssh
+              capabilities.
+          2. wpa_supplicant.conf
+            
