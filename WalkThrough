@@ -39,7 +39,7 @@ EXCLAIMED please pay special attention.
       used model so you can find it under the more section for the os. After you input the beginning stuf and click next you
       should get a prompt that asks if you would like to implement some settings or just do the bare install.
 
-      SAY YES! edit those settings so we don't have to add files yourself. but if you don't want to ill explain how to do that too
+      YOU SAY YES! edit those settings so we don't have to add files yourself. but if you don't want to ill explain how to do that too
 
 
       IMPORTANT! If you input the wrong settings before flashing you'll have to re-flash, so it's worth it to slow down and make
@@ -65,4 +65,27 @@ EXCLAIMED please pay special attention.
             -completly empty and you should see it dissapear after flashing, this is just telling the board to turn on ssh
               capabilities.
           2. wpa_supplicant.conf
+            -You'll need to replace the ssid with your wifi network name as well as the psk with the password/passkey. These are 
+             case sensitive.
+            -If you're outside the US that will also need to be changed. 
+          
+        c. If it didn't work my suggestion would be to first connect your pi to a monitor and see if it's telling you anything.
+           If nothing is out of the ordinary it should be displaying a ip address. If that address is 127.whatever.whatever that 
+           means it did not connect correctly to the network(it should say 10.whatever.whatever.whatever). Unfortunatly you will have to restart and re-flash. If you tried the 
+           method of using the launcher to set the settings I would double check you input all the info correct and try again with 
+           it aleast as single more time before attempting to make the files yourself. If you tried with the files the first time 
+           check out the launher settings.
+
+  B. Alright so if this all worked out you should be able to see your pi on the network. You should be able to confirm this by 
+     checking your routers info. 
+        
+          a.You can do this by going to http://10.0.0.1. there you should be able to login with admin and 
+            password in the username and password fields respectively.
+
+          b.Navigate to your connected devices or network connections list. You should see your raspberry pi there under your chosen 
+            name.
+                -small note some raspberry pi's can only connect to 2.4gHz networks so double check you have capabilities to conenct to.
+          
+          c.You should be able to see it's given ip address. Open a cmd window on your pc and go ahead and type ping "theRaspberryPi'sIP"
+            but with out the quotations. 
             
