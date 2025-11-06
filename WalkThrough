@@ -71,21 +71,54 @@ EXCLAIMED please pay special attention.
           
         c. If it didn't work my suggestion would be to first connect your pi to a monitor and see if it's telling you anything.
            If nothing is out of the ordinary it should be displaying a ip address. If that address is 127.whatever.whatever that 
-           means it did not connect correctly to the network(it should say 10.whatever.whatever.whatever). Unfortunatly you will have to restart and re-flash. If you tried the 
-           method of using the launcher to set the settings I would double check you input all the info correct and try again with 
-           it aleast as single more time before attempting to make the files yourself. If you tried with the files the first time 
-           check out the launher settings.
+           means it did not connect correctly to the network(it should say 10.whatever.whatever.whatever). Unfortunatly you will 
+           have to restart and re-flash. If you tried the  method of using the imager to set the settings I would double check you 
+           input all the info correct and try again with it aleast as single more time before attempting to make the files yourself.
+           If you tried with the files the first time check out the imager settings.
 
   B. Alright so if this all worked out you should be able to see your pi on the network. You should be able to confirm this by 
      checking your routers info. 
         
           a.You can do this by going to http://10.0.0.1. there you should be able to login with admin and 
-            password in the username and password fields respectively.
+            password in the username and password fields respectively(unless you changed this in which case it's your login).
 
           b.Navigate to your connected devices or network connections list. You should see your raspberry pi there under your chosen 
-            name.
+            name,default is raspberrypi.
                 -small note some raspberry pi's can only connect to 2.4gHz networks so double check you have capabilities to conenct to.
           
           c.You should be able to see it's given ip address. Open a cmd window on your pc and go ahead and type ping "theRaspberryPi'sIP"
-            but with out the quotations. 
-            
+            but without the quotations. 
+
+          d.Assuming that your pi is viewable, you'll need to set a static ip for the board. We are going to be senging info regularly
+            to the pi so we don't want our router dynamically assigning  it's ip and getting confused. this process is different for every isp 
+            so you'll likely need to do some pokeing around on your own or ask chatgpt or what have you. Likely it will be in the device  
+            info for the actual pi. 
+          
+          e.Next step is to SSH into the board.
+              -In a cmd window
+              -If you entered credentials in the imager you will use the cmd
+                  ssh your_username@raspberrypi.local
+
+              -If not you should have default so Username: pi -> Password:raspberry
+
+              -If those fail try the following
+                  ssh pi@raspberry.local
+                  ssh admin@raspberrypi.local
+                  ssh your_username@RaspberryPi'sIPAddress
+
+
+          f.Once you're ssh connects you should see a change in the path displayed when you are typing commands (thats the words on the left 
+            when youre typing in the cmd window). Next you need to install the pi hole so run.
+              curl -sSL https://install.pi-hole.net | sudo bash
+
+          g.This should install the packages and likely bring up a window asking about various configuration settings. If you want to know 
+            about the various options for configuration there should be links on each page describing the changes. If you're not feeling it 
+            there's nothing wrong with just doing all the suggested.   
+
+    C. Final step is to re-route the queries to your pi by making it the primary dns receiver. Unfortunatly, this is also very based on ISP
+       but you'll be around the same page as you were in earlier chacking for your raspberry pi's connection and setting its static ip.
+       If you made it this far congratu-raisins you made it at least as far as I. After working useing chatgpt and online resources for what
+       I guestimate around 6-8 hours and after informing chatgpt that I had Xfinity as an ISP around hour 2, it didn't feel the need to inform me
+       that you actually can't complete this step till I got to the last step and was unable to find the info. Unfortunatly no server for me, but
+       my hope is this guide saved you some of my pain.
+
